@@ -51,15 +51,17 @@ class InteractiveProcess(object):
         while not finishing:
             empty = True
             try:
-                data = self.q_stdout.get(timeout=0.001)
+                data = self.q_stdout.get(timeout=0.01).strip()
+
                 if data:
                     gotSomething = True
                 stdout.append(data)
                 empty = False
             except queue.Empty: pass
             try:
-                err = self.q_stderr.get(timeout=0.001)
-                if err:
+                err = self.q_stderr.get(timeout=0.01)
+                if err:# and (err != 'Coq < \n' and err != '\n'):
+                    #print('!!!>>>', repr(err[:100]))
                     gotSomething = True
                 stderr.append(err)
                 empty = False

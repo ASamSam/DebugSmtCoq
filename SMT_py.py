@@ -27,7 +27,7 @@ class coqSMTworker:
         t1 = time.time()
 
         smtOutFile = self.resFileName  +'_' + self.smtFile + '.v'
-        print ('smtOutFile', smtOutFile)
+        print ('smtOutFile', smtOutFile, os.path.join(self.outputFolder, smtOutFile))
         if os.path.isfile(os.path.join(self.outputFolder, smtOutFile)):
             print ('debugging file already exists, aborting')
             return -1
@@ -54,9 +54,9 @@ class coqSMTworker:
                 self.command("Compute @Euf_Checker.checker t_i t_func t_atom t_form root used_roots trace.")
                 self.command("Compute (Form.check_form t_form && Atom.check_atom t_atom && Atom.wt t_i t_func t_atom).")
                 self.command("Definition nclauses := Eval compute in let (nclauses, _, _) := trace in nclauses.")
-                time.sleep(4)
+                #time.sleep(4)
                 out, err = self.command("Print trace.")
-                self.provFile.write('\n(*' + out + '*)')
+                #self.provFile.write('\n(*' + cleanOutput(out) + '*)')
 
                 self.performStudy(out)
 
@@ -67,6 +67,9 @@ class coqSMTworker:
 
     #extracts the expected number of strings, and performs debug step by step
     def performStudy(self, textOriginal):
+        textOriginal = textOriginal.replace('t_form', 't_form ')
+        textOriginal = textOriginal.replace('t_atom', 't_atom ')
+        textOriginal = textOriginal.replace('t_func', 't_func ')
         text = textOriginal[textOriginal.find('(', textOriginal.find('t_form') ):]
         self.command("Definition s0 := Eval compute in (add_roots (S.make nclauses) root used_roots).")
         sCounter = 0
