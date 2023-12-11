@@ -35,6 +35,7 @@ class coqSMTworker:
             with open(os.path.join(self.outputFolder, smtOutFile), 'w') as self.provFile:
                 self.start()
                 self.provFile.write('\n(** studying ' + self.smtFile  + ' **)')
+                self.command('Add Rec LoadPath \"/home/arjun/Desktop/smtcoq/arjunvish-smtcoq-veritAst/smtcoq/src\" as SMTCoq.')
                 self.command('From SMTCoq Require Import SMTCoq.')
                 self.command('Require Import Bool PArray Int63 List ZArith.')
 
@@ -232,10 +233,10 @@ def rpcSInd(text, letter, index):
 #print (cleanOutput(test))
 
 # exec the debugger
-def runDebug(src=r'/home/asam/Desktop/LMF/pyProject/SMT', tryFile = 'ordresprv2'):
-    coqFileReader = coqSMTworker(outputFolder=r'/home/asam/Desktop/LMF/Arjun/2',
-                                 tryFile='debug2',
-                                 smtFile='congeqintsymm')
+def runDebug(src=r'./', tryFile = 'debug'):
+    coqFileReader = coqSMTworker(outputFolder=r'./',
+                                 tryFile='debug',
+                                 smtFile='test7cvc5')
 
     coqFileReader.run()
 
