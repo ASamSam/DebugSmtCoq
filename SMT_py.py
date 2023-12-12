@@ -221,6 +221,10 @@ def cleanOutput(text):
     res = res.replace('(list int)', '')
     res = res.replace('(PArray.Map.Raw.Leaf )', '')
     res = res.replace('PArray.Map.Raw.Node ', '')
+    res = res.replace('Map.Raw.Node', '')
+    res = res.replace('(Map.Raw.Leaf )', '')
+    res = res.replace('Map.Raw.Proofs.add_bst', '')
+    res = res.replace('Map.Raw.Proofs.empty_bst', '')
     res = res.replace('\n', ' ')
     pos = res.find('  ')
     while pos != -1:
