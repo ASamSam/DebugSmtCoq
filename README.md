@@ -14,4 +14,4 @@ Debugging step by step can be time-consuming.
 
 This library allows to use Coq in quasi-interactive mode, performing repetitive investigation till the '0#int63' marker is met, showing the exact place of the issue in the formula.
 
-Such an approach can be used for different repetitive requests in Coq. If you are interested in automating debugging in coq - feel free to contact: asam@lmf.cnrs.fr
+Such an approach can be used for different repetitive requests in Coq. If you are interested in automating debugging in coq - feel free to contact. Andrei Samokish asam@lmf.cnrs.fr
